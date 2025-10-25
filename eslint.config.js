@@ -15,6 +15,7 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs["recommended-latest"],
       reactRefresh.configs.vite,
+      ["plugin:prettier/recommended"]
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -26,6 +27,5 @@ export default defineConfig([
     rules: {
       "prettier/prettier": "error",
     },
-    extends: ["plugin:prettier/recommended"],
   },
 ]);
