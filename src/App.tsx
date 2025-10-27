@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
@@ -6,6 +8,7 @@ function App() {
     <>
       <Header />
       <h1>Hello World</h1>
+      <Button>Click me</Button>
       <Footer />
     </>
   );
