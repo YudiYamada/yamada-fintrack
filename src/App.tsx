@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 
 function App() {
-  window.document.documentElement.classList.add("dark");
   return (
     <div>
       <h1>Hello World</h1>
