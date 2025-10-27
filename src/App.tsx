@@ -1,16 +1,12 @@
 import { Button } from "@/components/ui/button";
 
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-
 function App() {
+  window.document.documentElement.classList.add("dark");
   return (
-    <>
-      <Header />
+    <div>
       <h1>Hello World</h1>
       <Button>Click me</Button>
-      <Footer />
-    </>
+    </div>
   );
 }
 
