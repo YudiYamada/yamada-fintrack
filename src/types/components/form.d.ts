@@ -1,8 +1,8 @@
 export type FormProps = {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   password: string;
-  passwordConfirmation: string;
-  terms: boolean;
+  passwordConfirmation?: string;
+  terms?: boolean;
 };
