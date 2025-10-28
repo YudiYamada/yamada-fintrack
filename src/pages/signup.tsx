@@ -52,7 +52,7 @@ function SignupPage() {
     }),
   });
 
-  const methods = useForm<z.infer<typeof signupSchema>>({
+  const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
       firstName: "",
@@ -70,9 +70,9 @@ function SignupPage() {
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-3">
-      <Form {...methods}>
-        <form onSubmit={methods.handleSubmit(handleSubmit)}>
-          <Card className="w-[500px]">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <Card className="w-[320px]">
             <CardHeader>
               <CardTitle>Crie a sua conta</CardTitle>
               <CardDescription>Insira os seus dados abaixo.</CardDescription>
@@ -80,7 +80,7 @@ function SignupPage() {
             <CardContent className="space-y-4">
               {/*Nome*/}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
@@ -95,7 +95,7 @@ function SignupPage() {
 
               {/*Sobrenome nome*/}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
@@ -110,11 +110,11 @@ function SignupPage() {
 
               {/*Email*/}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>E-mail</FormLabel>
                     <FormControl>
                       <Input placeholder="Digite seu email" {...field} />
                     </FormControl>
@@ -125,7 +125,7 @@ function SignupPage() {
 
               {/*Senha*/}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem>
@@ -143,7 +143,7 @@ function SignupPage() {
 
               {/*Confirmar senha*/}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="passwordConfirmation"
                 render={({ field }) => (
                   <FormItem>
@@ -160,7 +160,7 @@ function SignupPage() {
               />
 
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="terms"
                 render={({ field }) => (
                   <FormItem className="items-top flex space-y-0 space-x-2">
@@ -173,7 +173,7 @@ function SignupPage() {
                     <div className="leading-none">
                       <label
                         htmlFor="terms"
-                        className={`text-muted-foreground text-xs opacity-75 ${methods.formState.errors.terms && "text-red-500"}`}
+                        className={`text-muted-foreground text-xs opacity-75 ${form.formState.errors.terms && "text-red-500"}`}
                       >
                         Ao clicar em "Criar conta", você aceita{" "}
                         <a
