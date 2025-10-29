@@ -55,7 +55,7 @@ function SignupPage() {
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
-          <Card className="w-[320px]">
+          <Card className="w-[320px] md:w-md">
             <CardHeader>
               <CardTitle>Entre na sua conta</CardTitle>
               <CardDescription>Insira os seus dados abaixo.</CardDescription>
