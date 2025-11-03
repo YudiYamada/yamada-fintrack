@@ -42,7 +42,7 @@ const loginSchema = z.object({
   }),
 });
 
-function SignupPage() {
+function LoginPage() {
   const [user, setUser] = useState(null);
   const loginMutation = useMutation({
     mutationKey: ["login"],
@@ -163,4 +163,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default LoginPage;
