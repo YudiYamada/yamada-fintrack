@@ -1,6 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { toast } from "sonner";
 import * as z from "zod";
 
 import PasswordInput from "@/components/password-input";
@@ -22,21 +25,34 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { api } from "@/lib/axios";
 import type { FormProps } from "@/types/components/form";
 
-function SignupPage() {
-  const loginSchema = z.object({
-    email: z
-      .email({
-        message: "O e-mail é inválido.",
-      })
-      .trim()
-      .min(1, {
-        message: "O e-mail é obrigatório.",
-      }),
-    password: z.string().trim().min(6, {
-      message: "A senha deve ter no mínimo 6 caracteres.",
+const loginSchema = z.object({
+  email: z
+    .email({
+      message: "O e-mail é inválido.",
+    })
+    .trim()
+    .min(1, {
+      message: "O e-mail é obrigatório.",
     }),
+  password: z.string().trim().min(6, {
+    message: "A senha deve ter no mínimo 6 caracteres.",
+  }),
+});
+
+function SignupPage() {
+  const [user, setUser] = useState(null);
+  const loginMutation = useMutation({
+    mutationKey: ["login"],
+    mutationFn: async (variables: FormProps) => {
+      const response = await api.post("/users/login", {
+        email: variables.email,
+        password: variables.password,
+      });
+      return response.data;
+    },
   });
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -47,9 +63,46 @@ function SignupPage() {
     },
   });
 
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (!accessToken && !refreshToken) return;
+        const response = await api.get("/users/me", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setUser(response.data);
+      } catch (error) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        console.log("error", error);
+      }
+    };
+    init();
+  });
+
   const handleSubmit = (data: FormProps) => {
-    console.log(data);
+    loginMutation.mutate(data, {
+      onSuccess: (loggedUser) => {
+        const accessToken = loggedUser.tokens.accessToken;
+        const refreshToken = loggedUser.tokens.refreshToken;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        setUser(loggedUser);
+        toast.success("Login realizado com sucesso!");
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    });
   };
+
+  if (user) {
+    return <h1>Olá, {user.first_name}</h1>;
+  }
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-3">
