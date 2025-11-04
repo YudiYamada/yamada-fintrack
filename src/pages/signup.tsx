@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import * as z from "zod";
 
 import PasswordInput from "@/components/password-input";
@@ -63,7 +63,7 @@ const signupSchema = z
   );
 
 function SignupPage() {
-  const { user, signup } = useAuthContext();
+  const { user, signup, isInitializing } = useAuthContext();
 
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -79,8 +79,12 @@ function SignupPage() {
 
   const handleSubmit = (data: FormProps) => signup(data);
 
+  if (isInitializing) {
+    return null;
+  }
+
   if (user) {
-    return <h1>Olá {user.first_name}!</h1>;
+    return <Navigate to={`/`} />;
   }
 
   return (

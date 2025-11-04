@@ -15,6 +15,7 @@ export interface AuthUser {
 
 export interface AuthContextType {
   user: AuthUser | null;
+  isInitializing: boolean;
   login: (data: FormProps) => void;
   signup: (data: FormProps) => void;
 }

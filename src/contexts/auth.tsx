@@ -9,6 +9,7 @@ import type { AuthContextType, AuthUser, Tokens } from "@/types/contexts/auth";
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
+  isInitializing: true,
   login: () => {},
   signup: () => {},
 });
@@ -34,6 +35,7 @@ const removeTokens = () => {
 
 export const AuthContextProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   const signupMutation = useMutation({
     mutationKey: ["signup"],
@@ -62,6 +64,7 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const init = async () => {
       try {
+        setIsInitializing(true);
         const accessToken = localStorage.getItem(LOCAL_STORAGE_ACESS_TOKEN_KEY);
         const refreshToken = localStorage.getItem(
           LOCAL_STORAGE_REFRESH_TOKEN_KEY
@@ -76,8 +79,11 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
 
         setUser(response.data);
       } catch (error) {
+        setUser(null);
         removeTokens();
         console.log("error", error);
+      } finally {
+        setIsInitializing(false);
       }
     };
     init();
@@ -110,7 +116,7 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup }}>
+    <AuthContext.Provider value={{ user, login, signup, isInitializing }}>
       {children}
     </AuthContext.Provider>
   );
