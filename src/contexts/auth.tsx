@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { api } from "@/lib/axios";
@@ -16,6 +16,8 @@ export const AuthContext = createContext<AuthContextType>({
 interface AuthProviderProps {
   children: ReactNode;
 }
+
+export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<AuthUser | null>(null);
