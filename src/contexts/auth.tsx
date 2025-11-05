@@ -12,6 +12,7 @@ export const AuthContext = createContext<AuthContextType>({
   isInitializing: true,
   login: () => {},
   signup: () => {},
+  signOut: () => {},
 });
 
 interface AuthProviderProps {
@@ -115,8 +116,15 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
     });
   };
 
+  const signOut = () => {
+    setUser(null);
+    removeTokens();
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, isInitializing }}>
+    <AuthContext.Provider
+      value={{ user, login, signup, isInitializing, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
