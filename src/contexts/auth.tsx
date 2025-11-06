@@ -77,7 +77,6 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
         setUser(response.data);
       } catch (error) {
         setUser(null);
-        removeTokens();
         console.log("error", error);
       } finally {
         setIsInitializing(false);
