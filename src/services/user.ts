@@ -1,4 +1,4 @@
-import { publicApi } from "@/lib/axios";
+import { protectedApi, publicApi } from "@/lib/axios";
 import type { FormProps } from "@/types/components/form";
 
 export const UserService = {
@@ -9,6 +9,17 @@ export const UserService = {
       email: input.email,
       password: input.password,
     });
+    return response.data;
+  },
+  login: async (input: FormProps) => {
+    const response = await publicApi.post("/users/login", {
+      email: input.email,
+      password: input.password,
+    });
+    return response.data;
+  },
+  me: async () => {
+    const response = await protectedApi.get("/users/me");
     return response.data;
   },
 };

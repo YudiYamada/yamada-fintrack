@@ -7,7 +7,6 @@ import {
   LOCAL_STORAGE_ACESS_TOKEN_KEY,
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
 } from "@/constants/local-storage";
-import { protectedApi, publicApi } from "@/lib/axios";
 import { UserService } from "@/services/user";
 import type { FormProps } from "@/types/components/form";
 import type { AuthContextType, AuthUser, Tokens } from "@/types/contexts/auth";
@@ -50,11 +49,8 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
   const loginMutation = useMutation({
     mutationKey: ["login"],
     mutationFn: async (variables: FormProps) => {
-      const response = await publicApi.post("/users/login", {
-        email: variables.email,
-        password: variables.password,
-      });
-      return response.data;
+      const response = await UserService.login(variables);
+      return response;
     },
   });
 
@@ -67,10 +63,8 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
           LOCAL_STORAGE_REFRESH_TOKEN_KEY
         );
         if (!accessToken && !refreshToken) return;
-
-        const response = await protectedApi.get("/users/me");
-
-        setUser(response.data);
+        const response = await UserService.me();
+        setUser(response);
       } catch (error) {
         setUser(null);
         console.log("error", error);
