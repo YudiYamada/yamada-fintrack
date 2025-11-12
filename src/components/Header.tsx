@@ -1,4 +1,4 @@
-import { ChevronDownIcon, CircleDollarSign, LogOutIcon } from "lucide-react";
+import { ChevronDownIcon, JapaneseYen, LogOutIcon } from "lucide-react";
 
 import { useAuthContext } from "@/contexts/auth";
 
@@ -18,10 +18,10 @@ function Header() {
   const { user, signOut } = useAuthContext();
   return (
     <Card>
-      <CardContent className="flex items-center justify-between px-8 py-4">
+      <CardContent className="flex items-center justify-between px-8 py-0.5">
         <div>
           <h1 className="flex items-center justify-center gap-3">
-            <CircleDollarSign />{" "}
+            <JapaneseYen className="h-16 w-16" />{" "}
             <span className="text-lg font-bold">Yamanada Finance Track</span>
           </h1>
         </div>
