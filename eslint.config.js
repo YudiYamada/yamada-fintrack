@@ -26,7 +26,12 @@ export default defineConfig([
       "simple-import-sort": simpleImportSort,
     },
     rules: {
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          endOfLine: "auto",
+        },
+      ],
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "react-refresh/only-export-components": "off",
