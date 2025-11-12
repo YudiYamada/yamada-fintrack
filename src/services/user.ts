@@ -14,7 +14,7 @@ export const UserService = {
       email: response.data.email,
       firstName: response.data.first_name,
       lastName: response.data.last_name,
-      tokens: response.data.token,
+      tokens: response.data.tokens,
     };
   },
   login: async (input: FormProps) => {
@@ -27,7 +27,7 @@ export const UserService = {
       email: response.data.email,
       firstName: response.data.first_name,
       lastName: response.data.last_name,
-      tokens: response.data.token,
+      tokens: response.data.tokens,
     };
   },
   me: async () => {

@@ -26,16 +26,18 @@ protectedApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const request = error.config;
-    const refreshToken = localStorage.getItem(LOCAL_STORAGE_ACESS_TOKEN_KEY);
-    if (!refreshToken) return Promise.reject(error);
+    const refreshToken = localStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
+    if (!refreshToken) {
+      return Promise.reject(error);
+    }
     if (
-      error.response?.status === 401 &&
+      error.response.status === 401 &&
       !request._retry &&
       !request.url.includes("/users/refresh-token")
     ) {
       request._retry = true;
       try {
-        const response = await protectedApi.post("/auth/refresh", {
+        const response = await protectedApi.post("/users/refresh-token", {
           refreshToken,
         });
         const newAccessToken = response.data.accessToken;

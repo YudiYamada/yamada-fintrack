@@ -24,6 +24,7 @@ interface AuthProviderProps {
 }
 
 export const useAuthContext = () => useContext(AuthContext);
+
 const setTokens = (tokens: Tokens) => {
   localStorage.setItem(LOCAL_STORAGE_ACESS_TOKEN_KEY, tokens.accessToken);
   localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, tokens.refreshToken);
@@ -37,7 +38,6 @@ const removeTokens = () => {
 export const AuthContextProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
-
   const signupMutation = useMutation({
     mutationKey: ["signup"],
     mutationFn: async (variables: FormProps) => {
