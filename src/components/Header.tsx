@@ -28,7 +28,7 @@ function Header() {
 
         <div>
           <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
               <Button variant="outline" className="space-x-1">
                 <Avatar>
                   <AvatarImage />
