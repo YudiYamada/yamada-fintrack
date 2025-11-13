@@ -22,7 +22,7 @@ function Header() {
         <div>
           <h1 className="flex items-center justify-center gap-3">
             <JapaneseYen className="h-16 w-16" />{" "}
-            <span className="text-lg font-bold">Yamanada Finance Track</span>
+            <span className="text-lg font-bold">Yamada Finance Track</span>
           </h1>
         </div>
 
