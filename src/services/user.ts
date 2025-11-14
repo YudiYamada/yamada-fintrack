@@ -39,7 +39,7 @@ export const UserService = {
       lastName: response.data.last_name,
     };
   },
-  getBalance: async (input) => {
+  getBalance: async (input: { from: string; to: string }) => {
     const queryParams = new URLSearchParams();
     queryParams.set("from", input.from);
     queryParams.set("to", input.to);
