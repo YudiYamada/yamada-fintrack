@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { format } from "date-fns";
+import { format, formatDate } from "date-fns";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 
@@ -31,7 +31,14 @@ function DataSelection() {
     queryParams.set("from", formatDateToQueryParam(date.from));
     queryParams.set("to", formatDateToQueryParam(date.to));
     navigate(`/?${queryParams.toString()}`);
-    queryClient.invalidateQueries({ queryKey: ["balance", user?.id] });
+    queryClient.invalidateQueries({
+      queryKey: [
+        "balance",
+        user?.id,
+        formatDate(date.from, "yyyy-MM-dd"),
+        formatDate(date.to, "yyyy-MM-dd"),
+      ],
+    });
   }, [navigate, date, queryClient, user?.id]);
 
   return <DatePickerWithRange className="" value={date} onChange={setDate} />;
