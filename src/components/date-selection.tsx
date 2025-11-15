@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { format, formatDate } from "date-fns";
+import { addMonths, format, formatDate, isValid } from "date-fns";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 
@@ -11,19 +11,32 @@ const formatDateToQueryParam = (date: string | Date) => {
   return format(date, "yyyy-MM-dd");
 };
 
+const getInitialDateState = (searchParams: URLSearchParams) => {
+  const defaultDate = {
+    from: new Date(),
+    to: addMonths(new Date(), 1),
+  };
+  const from = searchParams.get("from");
+  const to = searchParams.get("to");
+  if (!from || !to) {
+    return defaultDate;
+  }
+  const datesAreInvalid = !isValid(new Date(from)) || !isValid(new Date(to));
+  if (datesAreInvalid) {
+    return defaultDate;
+  }
+  return {
+    from: new Date(from + "T00:00:00"),
+    to: new Date(to + "T00:00:00"),
+  };
+};
+
 function DataSelection() {
   const { user } = useAuthContext();
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [date, setDate] = useState({
-    from: searchParams.get("from")
-      ? new Date(searchParams.get("from") + "T00:00:00")
-      : new Date(),
-    to: searchParams.get("to")
-      ? new Date(searchParams.get("to") + "T00:00:00")
-      : new Date(),
-  });
+  const [date, setDate] = useState(getInitialDateState(searchParams));
 
   useEffect(() => {
     if (!date?.from || !date?.to) return;
