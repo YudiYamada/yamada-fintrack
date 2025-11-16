@@ -3,11 +3,11 @@ import type { ReactNode } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
+import { UserService } from "@/api/services/user";
 import {
   LOCAL_STORAGE_ACESS_TOKEN_KEY,
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
 } from "@/constants/local-storage";
-import { UserService } from "@/services/user";
 import type { FormProps } from "@/types/components/form";
 import type { AuthContextType, AuthUser, Tokens } from "@/types/contexts/auth";
 

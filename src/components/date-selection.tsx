@@ -51,6 +51,7 @@ function DataSelection() {
         formatDate(date.from, "yyyy-MM-dd"),
         formatDate(date.to, "yyyy-MM-dd"),
       ],
+      exact: true,
     });
   }, [navigate, date, queryClient, user?.id]);
 
