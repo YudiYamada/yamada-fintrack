@@ -75,19 +75,16 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
     });
   };
 
-  const login = (data: FormProps) => {
-    loginMutation.mutate(data, {
-      onSuccess: (loggedUser) => {
-        setUser(loggedUser);
-        setTokens(loggedUser.tokens);
-        toast.success("Login realizado com sucesso!");
-      },
-      onError: (error) => {
-        console.error(error);
-      },
-    });
+  const login = async (data: FormProps) => {
+    try {
+      const loggedUser = await loginMutation.mutateAsync(data);
+      setUser(loggedUser);
+      setTokens(loggedUser.tokens);
+      toast.success("Login realizado com sucesso!");
+    } catch (error) {
+      console.error(error);
+    }
   };
-
   const signOut = () => {
     setUser(null);
     removeTokens();
