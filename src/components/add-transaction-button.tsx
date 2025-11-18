@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { useCreateTransactionForm } from "@/forms/hooks/transaction";
 
-import DatePicker from "./ui/date-picker";
+import { DatePicker } from "./ui/date-picker";
 import {
   Form,
   FormControl,
