@@ -37,9 +37,10 @@ export const useCreateTransactionForm = ({ onSuccess, onError }) => {
 };
 
 const getEditTransactionFormDefaultValues = (transaction) => ({
+  id: transaction.id,
   name: transaction.name,
   amount: parseFloat(transaction.amount),
-  date: getTransactionDate(transaction),
+  date: new Date(transaction),
   type: transaction.type,
 });
 
