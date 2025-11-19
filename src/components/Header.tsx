@@ -19,7 +19,7 @@ function Header() {
   const { user, signOut } = useAuthContext();
   return (
     <Card>
-      <CardContent className="flex items-center justify-between px-8 py-0.5">
+      <CardContent className="flex items-center justify-between px-8">
         <div>
           <h1 className="flex items-center justify-center gap-3">
             <JapaneseYen className="h-16 w-16" />{" "}
@@ -37,7 +37,7 @@ function Header() {
                     {user?.firstName[0]} {user?.lastName[0]}
                   </AvatarFallback>
                 </Avatar>
-                <p className="text-sm">
+                <p className="hidden text-sm sm:block">
                   {user?.firstName} {user?.lastName}
                 </p>
                 <ChevronDownIcon />
