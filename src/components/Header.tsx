@@ -2,6 +2,7 @@ import { ChevronDownIcon, JapaneseYen, LogOutIcon } from "lucide-react";
 
 import { useAuthContext } from "@/contexts/auth";
 
+import ThemeToggleButton from "./theme-toggle-button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -45,6 +46,9 @@ function Header() {
             <DropdownMenuContent>
               <DropdownMenuLabel>Meu Perfil</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <ThemeToggleButton />
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <Button
                   variant={`ghost`}
