@@ -8,7 +8,7 @@ import { formatCurrency } from "@/helpers/currency";
 import EditTransactionButton from "./edit-transaction-button";
 import TransactionTypeBadge from "./transaction-type-badge";
 import { DataTable } from "./ui/data-table";
-import { ScrollArea } from "./ui/scroll-area";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 const columns = [
   {
@@ -58,6 +58,7 @@ function TransactionsTable() {
       <h2 className="text-2xl font-bold">Transações</h2>
       <ScrollArea className="h-[220px] max-h-[220px] rounded-md border">
         <DataTable columns={columns} data={transactions} />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </>
   );
