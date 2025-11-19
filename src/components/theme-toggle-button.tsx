@@ -29,12 +29,12 @@ function ThemeToggleButton() {
       {isDark ? (
         <div className="flex items-center justify-center gap-2">
           <SunIcon className="flex self-start" />
-          <span>Modo Escuro</span>
+          <span>Modo Claro</span>
         </div>
       ) : (
         <div className="flex items-center justify-center gap-2">
           <MoonIcon className="flex self-end" />
-          <span>Modo Claro</span>
+          <span>Modo Escuro</span>
         </div>
       )}
     </button>
