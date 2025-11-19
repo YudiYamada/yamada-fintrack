@@ -21,7 +21,7 @@ function HomePage() {
       <div className="space-y-6 p-8">
         <div className="flex flex-col items-center justify-between sm:flex-row">
           <h2 className="text-2xl font-bold">Dashboard</h2>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col-reverse items-center gap-2 sm:flex-row">
             <DataSelection />
             <AddTransactionButton />
             {/* SELETOR DE DATA E NOVA TRANSAÇÃO */}

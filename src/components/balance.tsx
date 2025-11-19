@@ -16,7 +16,7 @@ function Balance() {
   const to = searchParams.get("to");
   const { data } = useGetUserBalance({ from, to });
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-6">
+    <div className="grid gap-6 sm:grid-cols-2 sm:grid-rows-2">
       <BalanceItem
         label="Saldo"
         icon={<Wallet2Icon size={16} />}
