@@ -1,73 +1,128 @@
-# React + TypeScript + Vite
+# 💸 Yamada Finance Track
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um gerenciador financeiro moderno e intuitivo construído com React, TypeScript e TailwindCSS. Este projeto oferece uma interface limpa e funcional para organizar e acompanhar suas finanças pessoais.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Autenticação de Usuário**: Sistema completo de login e cadastro.
+- **Dashboard Financeiro**: Visualização do balanço geral (receitas, despesas e total).
+- **Gerenciamento de Transações**: Adicione, edite e visualize suas transações.
+- **Filtragem por Data**: Selecione períodos específicos para analisar suas finanças.
+- **Interface Responsiva**: Design moderno e adaptável a diferentes dispositivos.
+- **Tema Escuro e Claro**: Alterne entre os temas para melhor visualização.
 
-## React Compiler
+## 🛠️ Tecnologias Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
 
-## Expanding the ESLint configuration
+- **React 19** - Biblioteca principal para a interface.
+- **TypeScript** - Tipagem estática para JavaScript.
+- **Tailwind CSS** - Framework CSS para estilização.
+- **React Router** - Para o roteamento de páginas.
+- **React Hook Form** & **Zod** - Para gerenciamento e validação de formulários.
+- **TanStack Query** - Para gerenciamento de estado do servidor e cache.
+- **Axios** - Cliente HTTP para realizar requisições à API.
+- **Shadcn/UI** - Biblioteca de componentes de UI.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Backend
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+O projeto se conecta a uma API RESTful para persistência e gerenciamento dos dados.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **API**: `https://fullstackclub-finance-dashboard-api.onrender.com/api`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Ferramentas de Desenvolvimento
+
+- **Vite** - Build tool e servidor de desenvolvimento.
+- **ESLint** - Para linting de código.
+- **Prettier** - Para formatação de código.
+- **Husky** - Para hooks do Git.
+
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+
+- Node.js (versão 20.x ou superior)
+- npm (ou outro gerenciador de pacotes)
+
+### Instalação
+
+1.  **Clone o repositório**
+
+    ```bash
+    git clone https://github.com/YudiYamada/yamada-fintrack.git
+    cd yamada-fintrack
+    ```
+
+2.  **Instale as dependências**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Execute o projeto**
+
+    ```bash
+    npm run dev
+    ```
+
+    O frontend estará disponível em `http://localhost:5173` (ou outra porta, se a 5173 estiver em uso).
+
+### Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+npm run dev          # Inicia o servidor de desenvolvimento
+
+# Build
+npm run build        # Gera a build de produção
+npm run preview      # Visualiza a build de produção localmente
+
+# Qualidade de Código
+npm run lint         # Executa o ESLint para análise do código
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Estrutura do Projeto
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── api/                 # Hooks e serviços para a API (React Query)
+├── assets/              # Fontes e imagens
+├── components/          # Componentes React reutilizáveis
+├── constants/           # Constantes globais
+├── contexts/            # Contextos React (ex: Autenticação)
+├── forms/               # Schemas (Zod) e hooks para formulários
+├── helpers/             # Funções auxiliares
+├── lib/                 # Configuração de bibliotecas (axios, utils)
+├── pages/               # Páginas da aplicação (Home, Login, etc.)
+└── types/               # Definições de tipos TypeScript
+```
+
+## 🎨 Design System
+
+O projeto utiliza um sistema de design baseado em CSS variables com suporte para temas claro e escuro, configurado em `src/index.css`. As cores principais são definidas usando a função `oklch` para uma melhor consistência de cores.
+
+- **Primary**: `oklch(0.541 0.281 293.009)`
+- **Background**: `oklch(1 0 0)` (Claro) / `oklch(0.141 0.005 285.823)` (Escuro)
+- **Foreground**: `oklch(0.141 0.005 285.823)` (Claro) / `oklch(0.985 0 0)` (Escuro)
+- **Card**: `oklch(1 0 0)` (Claro) / `oklch(0.21 0.006 285.885)` (Escuro)
+- **Destructive**: `oklch(0.577 0.245 27.325)` (Cor para ações destrutivas/erros)
+
+## 📱 Responsividade
+
+O projeto foi desenvolvido com uma abordagem mobile-first, utilizando as classes utilitárias do Tailwind CSS para garantir que a aplicação seja totalmente funcional e visualmente agradável em todos os tamanhos de tela, de smartphones a desktops.
+
+## 🤝 Contribuição
+
+1.  Faça um fork do projeto.
+2.  Crie uma branch para sua feature (`git checkout -b feature/NovaFuncionalidade`).
+3.  Faça o commit de suas mudanças (`git commit -m 'Adiciona NovaFuncionalidade'`).
+4.  Faça o push para a branch (`git push origin feature/NovaFuncionalidade`).
+5.  Abra um Pull Request.
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 👨‍💻 Autor
+
+- **[Yudi Yamada](https://www.linkedin.com/in/yudi-yamada-0a10181b9/)**
