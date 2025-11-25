@@ -11,6 +11,7 @@ import { toast } from "sonner";
 
 import { useEditTransactionForm } from "@/forms/hooks/transaction";
 
+import DeleteTransactionButton from "./delete-transaction-button";
 import { Button } from "./ui/button";
 import { DatePicker } from "./ui/date-picker";
 import {
@@ -159,6 +160,10 @@ function EditTransactionButton({ transaction }) {
             />
 
             <SheetFooter>
+              <SheetClose asChild>
+                <DeleteTransactionButton transactionId={transaction.id} />
+              </SheetClose>
+
               <SheetClose asChild>
                 <Button
                   type="reset"
