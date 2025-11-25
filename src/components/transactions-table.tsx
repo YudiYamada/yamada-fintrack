@@ -4,36 +4,48 @@ import { useSearchParams } from "react-router";
 
 import { useGetTransactions } from "@/api/hooks/transaction";
 import { formatCurrency } from "@/helpers/currency";
+import { getTransactionDate } from "@/helpers/date";
 
 import EditTransactionButton from "./edit-transaction-button";
 import TransactionTypeBadge from "./transaction-type-badge";
 import { DataTable } from "./ui/data-table";
-import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { ScrollArea } from "./ui/scroll-area";
+import SortableColumnHeader from "./ui/sortable-column-header";
 
 const columns = [
   {
     accessorKey: "name",
-    header: "Título",
+    header: ({ column }) => {
+      return (
+        <SortableColumnHeader column={column}>Título</SortableColumnHeader>
+      );
+    },
   },
   {
     accessorKey: "type",
-    header: "Tipo",
+    header: ({ column }) => {
+      return <SortableColumnHeader column={column}>Tipo</SortableColumnHeader>;
+    },
     cell: ({ row: { original: transaction } }) => {
       return <TransactionTypeBadge variant={transaction.type.toLowerCase()} />;
     },
   },
   {
     accessorKey: "date",
-    header: "Data",
+    header: ({ column }) => {
+      return <SortableColumnHeader column={column}>Data</SortableColumnHeader>;
+    },
     cell: ({ row: { original: transaction } }) => {
-      return format(new Date(transaction.date), "dd 'de' MMMM 'de' yyyy", {
+      return format(getTransactionDate(transaction), "dd 'de' MMMM 'de' yyyy", {
         locale: ptBR,
       });
     },
   },
   {
     accessorKey: "amount",
-    header: "valor",
+    header: ({ column }) => {
+      return <SortableColumnHeader column={column}>Valor</SortableColumnHeader>;
+    },
     cell: ({ row: { original: transaction } }) => {
       return formatCurrency(transaction.amount);
     },
@@ -47,7 +59,7 @@ const columns = [
   },
 ];
 
-function TransactionsTable() {
+const TransactionsTable = () => {
   const [searchParams] = useSearchParams();
   const from = searchParams.get("from");
   const to = searchParams.get("to");
@@ -56,12 +68,11 @@ function TransactionsTable() {
   return (
     <>
       <h2 className="text-2xl font-bold">Transações</h2>
-      <ScrollArea className="h-[220px] max-h-[220px] rounded-md border">
+      <ScrollArea className="h-[450px] max-h-[450px] rounded-md border">
         <DataTable columns={columns} data={transactions} />
-        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </>
   );
-}
+};
 
 export default TransactionsTable;
