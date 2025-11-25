@@ -3,11 +3,11 @@ import queryString from "query-string";
 import { protectedApi } from "@/lib/axios";
 
 interface Transaction {
-  id: string; // O ID deve ser obrigatório no retorno
+  id: string;
   name: string;
-  date: string; // Geralmente string ISO 8601
+  date: string;
   amount: number;
-  type: "INCOME" | "EXPENSE" | string; // Exemplo de tipagem mais estrita para 'type'
+  type: "INCOME" | "EXPENSE" | string;
 }
 
 export const TransactionService = {
@@ -32,6 +32,10 @@ export const TransactionService = {
       amount: input.amount,
       type: input.type,
     });
+    return response.data;
+  },
+  delete: async (input: { id: string }) => {
+    const response = await protectedApi.delete(`/transactions/me/${input.id}`);
     return response.data;
   },
 };
