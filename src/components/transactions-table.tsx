@@ -9,7 +9,7 @@ import { getTransactionDate } from "@/helpers/date";
 import EditTransactionButton from "./edit-transaction-button";
 import TransactionTypeBadge from "./transaction-type-badge";
 import { DataTable } from "./ui/data-table";
-import { ScrollArea } from "./ui/scroll-area";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import SortableColumnHeader from "./ui/sortable-column-header";
 
 const columns = [
@@ -68,8 +68,9 @@ const TransactionsTable = () => {
   return (
     <>
       <h2 className="text-2xl font-bold">Transações</h2>
-      <ScrollArea className="h-[450px] max-h-[450px] rounded-md border">
+      <ScrollArea className="h-[220px] rounded-md border">
         <DataTable columns={columns} data={transactions} />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </>
   );
